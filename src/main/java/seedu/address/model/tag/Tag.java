@@ -27,8 +27,19 @@ public class Tag {
      */
     public Tag(Module module, Tutorial tutorial) {
         requireNonNull(module);
+        requireNonNull(tutorial);
         this.module = module;
         this.tutorial = tutorial;
+    }
+
+    /**
+     * Constructs a {@code Tag}.
+     * @param module A module of a student.
+     */
+    public Tag(Module module) {
+        requireNonNull(module);
+        this.module = module;
+        this.tutorial = null;
     }
 
     /**
@@ -101,7 +112,6 @@ public class Tag {
      */
     public String toString() {
         String tutorialName = (tutorial == null) ? NO_TUTORIAL_MESSAGE : tutorial.toString();
-        return "[Module: " + module + ", Tutorial: " + tutorial + "]";
+        return module + ":" + tutorial.getTutName() + ":" + tutorial.getTime();
     }
-
 }
