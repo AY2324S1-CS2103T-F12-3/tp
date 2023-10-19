@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
@@ -47,7 +48,8 @@ public class SearchCommandTest {
 
     @Test
     public void execute_searchByModule() {
-        Tag module = new Tag(MODULE_CS2100);
+        // may be changed later
+        Tag module = new Tag(new Module(MODULE_CS2100));
         List<Name> nameList = new ArrayList<>();
         List<Tag> moduleList = new ArrayList<>(Arrays.asList(module));
 
@@ -61,8 +63,9 @@ public class SearchCommandTest {
         List<Name> aliceNameList = new ArrayList<>(Arrays.asList(new Name("Alice")));
         List<Name> bobNameList = new ArrayList<>(Arrays.asList(new Name("Bob")));
 
-        List<Tag> cs2100ModuleList = new ArrayList<>(Arrays.asList(new Tag("CS2100")));
-        List<Tag> cs2040ModuleList = new ArrayList<>(Arrays.asList(new Tag("CS2040")));
+        // may be changed later
+        List<Tag> cs2100ModuleList = new ArrayList<>(Arrays.asList(new Tag(new Module("CS2100"))));
+        List<Tag> cs2040ModuleList = new ArrayList<>(Arrays.asList(new Tag(new Module("CS2040"))));
 
         SearchCommand baseSearchCommand = new SearchCommand(aliceNameList, cs2100ModuleList);
         SearchCommand baseSearchCommandAlt = new SearchCommand(aliceNameList, cs2100ModuleList);

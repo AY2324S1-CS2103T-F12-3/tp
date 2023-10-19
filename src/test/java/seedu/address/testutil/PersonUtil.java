@@ -35,7 +35,8 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            // may be changed later
+            s -> sb.append(PREFIX_TAG + s.toString() + " ")
         );
         return sb.toString();
     }
@@ -54,7 +55,8 @@ public class PersonUtil {
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                // may be changed later
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.toString()).append(" "));
             }
         }
         return sb.toString();
