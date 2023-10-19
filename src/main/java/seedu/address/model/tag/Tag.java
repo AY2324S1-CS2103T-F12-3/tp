@@ -11,8 +11,10 @@ import seedu.address.model.tutorial.Tutorial;
  * Represents a Tag in the address book.
  */
 public class Tag {
-
-    private final String NO_TUTORIAL_MESSAGE = "no tutorial yet";
+    public static final String MESSAGE_CONSTRAINTS = "Tags should be alphanumeric";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+:\\p{Alnum}+:\\p{Alnum}*";
+    public static final String NO_TUTORIAL_PARSE_TEXT = "NULL";
+    private static final String NO_TUTORIAL_MESSAGE = "no tutorial yet";
 
     public final Module module;
 
@@ -28,6 +30,14 @@ public class Tag {
         this.module = module;
         this.tutorial = tutorial;
     }
+
+    /**
+     * Returns true if a given string is a valid tag name.
+     */
+     public static boolean isValidTagName(String test) {
+         return test.matches(VALIDATION_REGEX);
+     }
+
 
     /**
      * @param other the other object to be compared.
