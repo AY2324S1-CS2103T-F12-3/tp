@@ -116,8 +116,8 @@ public class ParserUtil {
         String tutorialTime = tagDetails[2];
 
         Module module = new Module(moduleName);
-        Tutorial tutorial = (tutorialName == Tag.NO_TUTORIAL_PARSE_TEXT) ? null :
-                new Tutorial(module, tutorialName, tutorialTime);
+        Tutorial tutorial = (tutorialName == Tag.NO_TUTORIAL_PARSE_TEXT) ? null
+                : new Tutorial(module, tutorialName, tutorialTime);
 
         return new Tag(module, tutorial);
     }

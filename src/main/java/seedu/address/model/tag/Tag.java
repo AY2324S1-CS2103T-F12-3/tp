@@ -31,10 +31,16 @@ public class Tag {
         this.tutorial = tutorial;
     }
 
+    /**
+     * @return the module of the Tag
+     */
     public Module getModule() {
         return module;
     }
 
+    /**
+     * @return the tutorial of the Tag
+     */
     public Tutorial getTutorial() {
         return tutorial;
     }

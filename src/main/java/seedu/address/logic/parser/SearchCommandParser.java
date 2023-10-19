@@ -35,7 +35,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
                 .collect(Collectors.toList());
         final List<Tag> moduleTagList = argMultimap.getAllValues(PREFIX_MODULE)
                 .stream()
-                .map(moduleCode -> new Tag(new Module(moduleCode), null))   // may be changed
+                .map(moduleCode -> new Tag(new Module(moduleCode), null)) // may be changed
                 .collect(Collectors.toList());
         return new SearchCommand(personNameList, moduleTagList);
     }
