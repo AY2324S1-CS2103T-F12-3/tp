@@ -45,7 +45,7 @@ class JsonAdaptedTag {
         if (!Tag.isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(new Module(tagName), null);  // just a placeholder, will be modifed later
+        return new Tag(new Module(tagName), null); // just a placeholder, will be modifed later
     }
 
 }
