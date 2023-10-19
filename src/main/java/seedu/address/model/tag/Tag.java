@@ -31,6 +31,14 @@ public class Tag {
         this.tutorial = tutorial;
     }
 
+    public Module getModule() {
+        return module;
+    }
+
+    public Tutorial getTutorial() {
+        return tutorial;
+    }
+
     /**
      * Returns true if a given string is a valid tag name.
      */
