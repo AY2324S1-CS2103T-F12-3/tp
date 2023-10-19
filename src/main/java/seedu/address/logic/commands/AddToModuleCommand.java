@@ -83,7 +83,7 @@ public class AddToModuleCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
-        updatedTags.add(new Tag(this.moduleToAddTo.getModuleCode()));
+        updatedTags.add(new Tag(this.moduleToAddTo, null));
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }

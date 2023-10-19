@@ -1,28 +1,59 @@
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
+
+import seedu.address.model.module.Module;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
+    public static final String MESSAGE_CONSTRAINTS = "Tags should be alphanumeric";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+:\\p{Alnum}+:\\p{Alnum}*";
+    public static final String NO_TUTORIAL_PARSE_TEXT = "NULL";
+    private static final String NO_TUTORIAL_MESSAGE = "no tutorial yet";
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public final Module module;
 
-    public final String tagName;
+    public final Tutorial tutorial;
 
     /**
      * Constructs a {@code Tag}.
-     *
-     * @param tagName A valid tag name.
+     * @param module A module of a student.
+     * @param tutorial A tutorial of a student.
      */
-    public Tag(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+    public Tag(Module module, Tutorial tutorial) {
+        requireNonNull(module);
+        requireNonNull(tutorial);
+        this.module = module;
+        this.tutorial = tutorial;
+    }
+
+    /**
+     * Constructs a {@code Tag}.
+     * @param module A module of a student.
+     */
+    public Tag(Module module) {
+        requireNonNull(module);
+        this.module = module;
+        this.tutorial = null;
+    }
+
+    /**
+     * @return the module of the Tag
+     */
+    public Module getModule() {
+        return module;
+    }
+
+    /**
+     * @return the tutorial of the Tag
+     */
+    public Tutorial getTutorial() {
+        return tutorial;
     }
 
     /**
@@ -32,6 +63,11 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
 
+
+    /**
+     * @param other the other object to be compared.
+     * @return true if the Module is same only!
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -44,19 +80,38 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return module.equals(otherTag.module);
+    }
+
+    /**
+     * justify if the Module and the Tutorial of both Tags are same.
+     * @param other the other object to be compared.
+     * @return true if the Module and Tutorial are same!
+     */
+    public boolean isSame(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Tag)) {
+            return false;
+        }
+
+        Tag otherTag = (Tag) other;
+        return module.equals(otherTag.module) && tutorial.equals(otherTag.tutorial);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return Objects.hash(module, tutorial);
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        String tutorialName = (tutorial == null) ? NO_TUTORIAL_MESSAGE : tutorial.toString();
+        return module + ":" + tutorial.getTutName() + ":" + tutorial.getTime();
     }
-
 }

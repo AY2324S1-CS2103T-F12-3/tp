@@ -141,7 +141,8 @@ public class AddressBookParserTest {
                 + PREFIX_NAME + testName + " " + PREFIX_MODULE + testModuleString);
 
         List<Name> nameList = new ArrayList<>(Arrays.asList(new Name(testName)));
-        List<Tag> moduleList = new ArrayList<>(Arrays.asList(new Tag(testModuleString)));
+        // may be changed later
+        List<Tag> moduleList = new ArrayList<>(Arrays.asList(new Tag(new Module(testModuleString))));
         assertEquals(new SearchCommand(nameList, moduleList), command);
     }
     @Test

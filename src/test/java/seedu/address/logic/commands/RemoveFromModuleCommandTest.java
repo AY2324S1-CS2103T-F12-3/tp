@@ -57,7 +57,8 @@ public class RemoveFromModuleCommandTest {
 
         Person originalPerson = model.getAddressBook().getPersonList().get(0);
         Set<Tag> updatedTags = new HashSet<>(originalPerson.getTags());
-        updatedTags.add(new Tag("CS1000"));
+        // may be changed later
+        updatedTags.add(new Tag(new Module("CS1000")));
         Person editedPerson = new Person(originalPerson.getName(), originalPerson.getPhone(),
                 originalPerson.getEmail(), originalPerson.getAddress(), updatedTags);
         model.setPerson(model.getFilteredPersonList().get(0), editedPerson);

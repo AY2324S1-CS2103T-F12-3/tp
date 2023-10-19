@@ -85,7 +85,7 @@ public class RemoveFromModuleCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
-        updatedTags.remove(new Tag(this.moduleToRemoveFrom.getModuleCode()));
+        updatedTags.remove(new Tag(this.moduleToRemoveFrom, null));
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
@@ -97,7 +97,7 @@ public class RemoveFromModuleCommand extends Command {
      * @return Whether the person is part of the module.
      */
     private boolean personHasModule(Person personToCheck, Module module) {
-        return personToCheck.getTags().contains(new Tag(module.getModuleCode()));
+        return personToCheck.getTags().contains(new Tag(module, null));
     }
 
     @Override
