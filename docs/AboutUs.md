@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/jacksonyuan256.png" width="200px">
 
-[[github](http://github.com/jacksonyuan256)] [[portfolio](team/jackson.md)]
+[[github](http://github.com/jacksonyuan256)] [[portfolio](team/jacksonyuan256.md)]
 
 * Role: Developer
 * Responsibilities: Module Management & Code Quality

@@ -22,10 +22,13 @@ public class AttendanceCommandParser implements Parser<AttendanceCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ATTENDANCE);
 
-        // check if "se/" prefix exists
+        // check if "ln/" prefix exists
         if (!isPrefixPresent(argMultimap, PREFIX_ATTENDANCE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendanceCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE);
+
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         Tag toAdd = ParserUtil.parseTag(argMultimap.getValue(PREFIX_ATTENDANCE).get());
 

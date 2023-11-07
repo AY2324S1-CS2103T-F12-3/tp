@@ -171,7 +171,7 @@ Format: `search CONDITION1, CONDITION2, …`
 Examples:
 * `search module: CS2103T` returns all students in the module CS2103T
 * `search classNum: T03` returns all students in the class T03
-* `search studentName:` John Doe' returns all students with the name John Doe
+* `search studentName:` 'John Doe' returns all students with the name John Doe
 
 ### Clearing all entries : `clear`
 
@@ -206,7 +206,7 @@ The module name must consist of only alphanumeric characters, between 5 - 8 char
 Modules must be added one at a time.
 
 The output for module name inputs "cs2100" and "CS2100" will be the same as the module
-shown on the GUI will be capitalised.
+shown on the GUI will always be capitalised.
 
 Will give an error message if the module already exists in TASsistant,
 further prompts are given for incorrect inputs.
@@ -298,6 +298,8 @@ Example: `removeFromTutorial 1 m/CS2103T tn/T11`
 Records a student's attendance and displays the change by adding a tag on the GUI.
 The index refers to the position of the person as displayed in the GUI.
 The LESSON_NUMBER must be alphanumeric.
+
+Will give an error message if the LESSON_NUMBER already exists on the student.
 Further prompts are given for incorrect inputs.
 
 Format: `attn INDEX ln/LESSON_NUMBER`
@@ -309,6 +311,12 @@ Example: `attn 1 ln/S1`
 Deletes a student's attendance and displays the change by removing the tag on the GUI.
 The index refers to the position of the person as displayed in the GUI.
 The LESSON_NUMBER must be alphanumeric.
+
+Only tags that were added using `attn` can be deleted by this command.
+
+Likewise, tags that were not added through `attn` cannot be deleted by this command.
+If you try to delete a tag that was not added with `attn`, it will throw an error.
+
 Will give an error message if the LESSON_NUMBER does not exist.
 Further prompts are given for incorrect inputs.
 

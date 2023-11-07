@@ -1,9 +1,12 @@
 package seedu.address.model;
 
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -30,4 +33,6 @@ public interface ReadOnlyAddressBook {
     ObservableList<Tutorial> getTutorialList();
 
     ObservableList<Assignment> getAssignmentList();
+
+    List<Tag> getAttendanceTagsList();
 }

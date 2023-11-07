@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -27,8 +29,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Module> modules;
     private final FilteredList<Tutorial> tutorials;
-
     private final FilteredList<Assignment> assignments;
+    private List<Tag> attendanceTags;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,6 +46,7 @@ public class ModelManager implements Model {
         modules = new FilteredList<>(this.addressBook.getModuleList());
         tutorials = new FilteredList<>(this.addressBook.getTutorialList());
         assignments = new FilteredList<>(this.addressBook.getAssignmentList());
+        attendanceTags = this.addressBook.getAttendanceTagsList();
     }
 
     public ModelManager() {
@@ -220,6 +223,25 @@ public class ModelManager implements Model {
     }
 
     // others
+    @Override
+    public void addAttendanceTag(Tag tag) {
+        addressBook.addAttendanceTag(tag);
+    }
+
+    @Override
+    public void deleteAttendanceTag(Tag tag) {
+        addressBook.deleteAttendanceTag(tag);
+    }
+
+    @Override
+    public boolean hasAttendanceTag(Tag tag) {
+        return addressBook.hasAttendanceTag(tag);
+    }
+
+    @Override
+    public List<Tag> getAttendanceTagsList() {
+        return attendanceTags;
+    }
 
     @Override
     public boolean equals(Object other) {

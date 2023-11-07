@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -111,4 +113,12 @@ public interface Model {
     boolean hasAssignment(Assignment assignment);
 
     ObservableList<Assignment> getAssignmentList();
+
+    void addAttendanceTag(Tag tag);
+
+    void deleteAttendanceTag(Tag tag);
+
+    boolean hasAttendanceTag(Tag tag);
+
+    List<Tag> getAttendanceTagsList();
 }

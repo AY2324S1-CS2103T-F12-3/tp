@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,6 +25,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.model.tutorial.UniqueTutorialList;
 import seedu.address.testutil.PersonBuilder;
@@ -133,7 +135,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Assignment> getAssignmentList() {
             return new FilteredList<>(new UniqueAssignmentList().asUnmodifiableObservableList());
+        }
 
+        @Override
+        public List<Tag> getAttendanceTagsList() {
+            return new ArrayList<Tag>();
         }
     }
 

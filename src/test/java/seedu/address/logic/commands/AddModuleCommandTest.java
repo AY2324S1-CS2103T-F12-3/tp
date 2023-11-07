@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.ModuleBuilder;
 
@@ -211,6 +213,26 @@ public class AddModuleCommandTest {
         @Override
         public ObservableList<Assignment> getAssignmentList() {
             throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addAttendanceTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAttendanceTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAttendanceTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Tag> getAttendanceTagsList() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

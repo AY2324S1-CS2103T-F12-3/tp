@@ -35,6 +35,7 @@ public class DeleteAttendanceCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Attendance successfully deleted.";
     public static final String MESSAGE_NO_LESSON_FOUND = "The lesson number does not exist!";
+    public static final String MESSAGE_NOT_ATTENDANCE_TAG = "You cannot delete non-attendance tags!";
 
     private final Index index;
     private final Tag toDelete;
@@ -60,10 +61,16 @@ public class DeleteAttendanceCommand extends Command {
         if (!personToEdit.getTags().contains(toDelete)) {
             throw new CommandException(MESSAGE_NO_LESSON_FOUND);
         }
+        String studentNumber = personToEdit.getStudentNumber().toString();
+        Tag specialTag = new Tag(studentNumber + toDelete.tagName);
+        if (!model.hasAttendanceTag(specialTag)) {
+            throw new CommandException(MESSAGE_NOT_ATTENDANCE_TAG);
+        }
         Person editedPerson = createEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.deleteAttendanceTag(specialTag);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
     }
 

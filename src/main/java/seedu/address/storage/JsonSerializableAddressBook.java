@@ -14,6 +14,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -25,11 +26,12 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_MODULE = "Modules list contains duplicate module(s).";
     public static final String MESSAGE_DUPLICATE_TUTORIAL = "Tutorials list contains duplicate tutorial(s).";
+    public static final String MESSAGE_DUPLICATE_ATTENDANCE_TAG = "Tag list contains duplicate tag(s).";
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
     private final List<JsonAdaptedTutorial> tutorials = new ArrayList<>();
-
     private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
+    private final List<JsonAdaptedTag> attendanceTags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
@@ -49,6 +51,8 @@ class JsonSerializableAddressBook {
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
         tutorials.addAll(source.getTutorialList().stream().map(JsonAdaptedTutorial::new).collect(Collectors.toList()));
         assignments.addAll(source.getAssignmentList().stream().map(JsonAdaptedAssignment::new)
+                .collect(Collectors.toList()));
+        attendanceTags.addAll(source.getAttendanceTagsList().stream().map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
 
@@ -89,6 +93,14 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL);
             }
             addressBook.addAssignment(tutorial);
+        }
+
+        for (JsonAdaptedTag jsonAdaptedTag : attendanceTags) {
+            Tag attendanceTag = jsonAdaptedTag.toModelType();
+            if (addressBook.hasAttendanceTag(attendanceTag)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ATTENDANCE_TAG);
+            }
+            addressBook.addAttendanceTag(attendanceTag);
         }
 
         return addressBook;
