@@ -42,7 +42,7 @@ public class DeleteAttendanceCommandTest {
     public void execute_validIndexAndTag_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Tag toDelete = new Tag("S1");
-        model.addAttendanceTag(new Tag("0S1"));
+        model.addAttendanceTag(new Tag("A0203220JS1"));
 
         Person person = model.getFilteredPersonList().get(0);
         Person editedPerson = new PersonBuilder(person).withTags("friends", "S1").build();
