@@ -63,7 +63,6 @@ public class AttendanceCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-
         String studentNumber = personToEdit.getStudentNumber().toString();
         model.addAttendanceTag(new Tag(studentNumber + toAdd.tagName));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
