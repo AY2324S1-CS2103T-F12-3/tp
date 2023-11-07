@@ -171,7 +171,8 @@ Format: `search CONDITION1, CONDITION2, …`
 Examples:
 * `search module: CS2103T` returns all students in the module CS2103T
 * `search classNum: T03` returns all students in the class T03
-* `search studentName:` 'John Doe' returns all students with the name John Doe
+* `search studentName: John Doe`  returns all students with the name John Doe
+
 
 ### Clearing all entries : `clear`
 
