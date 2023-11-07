@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithAttendance;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,6 @@ public class DeleteAttendanceCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Tag toDelete = new Tag("S1");
 
-
         DeleteAttendanceCommand deleteAttendanceCommand = new DeleteAttendanceCommand(INDEX_FIRST_PERSON, toDelete);
         assertCommandFailure(deleteAttendanceCommand, model, DeleteAttendanceCommand.MESSAGE_NO_LESSON_FOUND);
     }
@@ -55,6 +55,14 @@ public class DeleteAttendanceCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         assertCommandSuccess(deleteAttendanceCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_notAttendanceTag_errorMessage() {
+        Model model = new ModelManager(getTypicalAddressBookWithAttendance(), new UserPrefs());
+
+        assertCommandFailure(new DeleteAttendanceCommand(INDEX_FIRST_PERSON,
+                new Tag("friends")), model, DeleteAttendanceCommand.MESSAGE_NOT_ATTENDANCE_TAG);
     }
 
     @Test

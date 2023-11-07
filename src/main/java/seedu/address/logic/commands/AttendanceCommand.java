@@ -55,16 +55,19 @@ public class AttendanceCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        if (model.hasAttendanceTag(toAdd)) {
+        // create special tag to put in attendance list
+        String studentNumber = personToEdit.getStudentNumber().toString();
+        Tag specialTag = new Tag(studentNumber + toAdd.tagName);
+
+        if (model.hasAttendanceTag(specialTag)) {
             throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
         }
         Person editedPerson = createEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.addAttendanceTag(specialTag);
 
-        String studentNumber = personToEdit.getStudentNumber().toString();
-        model.addAttendanceTag(new Tag(studentNumber + toAdd.tagName));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
     }
 

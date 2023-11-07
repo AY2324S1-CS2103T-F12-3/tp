@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithAttendance;
 
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +44,14 @@ public class AttendanceCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(attendanceCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_duplicateAttendance_errorMessage() {
+        Model model = new ModelManager(getTypicalAddressBookWithAttendance(), new UserPrefs());
+
+        assertCommandFailure(new AttendanceCommand(INDEX_FIRST_PERSON,
+                new Tag("S1")), model, AttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE);
     }
 
     @Test
