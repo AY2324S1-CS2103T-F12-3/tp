@@ -21,7 +21,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddModuleCommand;
 import seedu.address.logic.commands.AddTutorialCommand;
+import seedu.address.logic.commands.AttendanceCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAttendanceCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteModuleCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -128,6 +130,24 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_attendance() throws Exception {
+        String inputCmd = AttendanceCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " ln/S1";
+        AttendanceCommand command = (AttendanceCommand) parser.parseCommand(inputCmd);
+        Tag tag = new Tag("S1");
+
+        assertEquals(new AttendanceCommand(INDEX_FIRST_PERSON, tag), command);
+    }
+
+    @Test
+    public void parseCommand_deleteAttendance() throws Exception {
+        String inputCmd = DeleteAttendanceCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " ln/S1";
+        DeleteAttendanceCommand command = (DeleteAttendanceCommand) parser.parseCommand(inputCmd);
+        Tag tag = new Tag("S1");
+
+        assertEquals(new DeleteAttendanceCommand(INDEX_FIRST_PERSON, tag), command);
     }
 
     @Test
