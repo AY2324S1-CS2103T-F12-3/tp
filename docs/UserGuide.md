@@ -221,7 +221,7 @@ Example: `addModule m/CS2100`
 Deletes the module from TASsistant and the GUI will change to reflect this.
 The index refers to the position of the module displayed on the GUI.
 
-Any related tutorials on the GUI as well as modules/tutorials on students 
+Any related tutorials on the GUI as well as modules/tutorials on students
 will also be deleted. As such, please use this command with discretion.
 
 Will give an error message if the module does not exist in TASsistant,
@@ -279,7 +279,7 @@ if module CS2103T exists and the tutorial already exists.
 
 ### Adds a person to stated Tutorial: `addToTutorial`
 
-Adds a given user to the stated tutorial. 
+Adds a given user to the stated tutorial.
 The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3. Fails if the index is not valid.
 
 Format: `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME`

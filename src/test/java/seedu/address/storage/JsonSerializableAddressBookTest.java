@@ -21,7 +21,8 @@ public class JsonSerializableAddressBookTest {
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
     private static final Path DUPLICATE_MODULE_FILE = TEST_DATA_FOLDER.resolve("duplicateModuleAddressBook.json");
     private static final Path DUPLICATE_TUTORIAL_FILE = TEST_DATA_FOLDER.resolve("duplicateTutorialAddressBook.json");
-    private static final Path DUPLICATE_ATTN_TAG_FILE = TEST_DATA_FOLDER.resolve("duplicateAttendanceTagAddressBook.json");
+    private static final Path DUPLICATE_ATTN_TAG_FILE =
+            TEST_DATA_FOLDER.resolve("duplicateAttendanceTagAddressBook.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
