@@ -317,16 +317,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                      | So that I can…​                                                                       |
-|----------|--------|------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| `* * *`  | user   | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for        |
-| `* * *`  | user   | search for all my students in a module                           | manage them more easily                                                              |
-| `* * *`  | user   | read information about students, modules and classes from a file | keep any students added or closed even after closing the program                     |
-| `* * *`  | user   | view my students school email and telegram handle                | contact them if needed                                                               |
-| `* * *`  | user   | sign up as a TA of module(s)                                     | manage what modules I am part of                                                     |
-| `* * *`  | user   | add and delete lessons                                           | it is easier for me to organise my schedule.                                         |
-| `* * *`  | user   | filter students by class and module                              | I can make preparations based on upcoming classes, like marking their work           |
-| `* * *`  | user   | add and remove students to classes	                             | it is easier for me to organise my schedule.                                         |
+| Priority | As a …​ | I want to …​                                                     | So that I can…​                                                               |
+|----------|---------|------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user    | search for professors for a module                               | quickly search for the professor that is conducting the module I am TAing for |
+| `* * *`  | user    | search for all my students in a module                           | manage them more easily                                                       |
+| `* * *`  | user    | read information about students, modules and classes from a file | keep any students added or closed even after closing the program              |
+| `* * *`  | user    | view my students school email and telegram handle                | contact them if needed                                                        |
+| `* * *`  | user    | sign up as a TA of module(s)                                     | manage what modules I am part of                                              |
+| `* * *`  | user    | add and delete lessons                                           | it is easier for me to organise my schedule.                                  |
+| `* * *`  | user    | filter students by class and module                              | make preparations based on upcoming classes, like marking their work          |
+| `* * *`  | user    | add and remove students to classes	                              | it is easier for me to organise my schedule.                                  |
+| `* *`    | user    | edit the information of students                                 | rectify any mistakes made for personal information and grades.                |
+| `* *`    | user    | view my professors' email in the same mod                        | easily reach out to them for updates or help.                                 |
+| `* *`    | user    | edit the classes I teach                                         | it does not conflict with any of my other classes.                            |
+| `* *`    | user    | export the attendance list as a pdf	                             | submit it to the people in charge                                             |
 
 *{More to be added}*
 
@@ -380,7 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.
 * **Module**: A unit of study in a specific field set by NUS, such as CS2103T focusing on Software Engineering.
-* **Class**: Lessons that are part of a module. Includes laboratries, recitations, tutorials and any form of lesson that includes a TA.
+* **Class**: Lessons that are part of a module. Includes laboratories, recitations, tutorials and any form of lesson that includes a TA.
 
 --------------------------------------------------------------------------------------------------------------------
 

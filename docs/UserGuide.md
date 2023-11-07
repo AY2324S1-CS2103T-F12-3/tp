@@ -10,7 +10,7 @@ TASsistant is a desktop app for Teaching Assistants (TAs) in NUS to track inform
 involved in tutoring. It is optimised for users that have experience with a Command Line Interface (CLI) and aims to be
 able to handle contact organisation faster than GUI apps if the user can type quickly.
 
-<!-- @@author cbj252-reused
+<!-- @@author izzahaj-reused
 Table Reused from (https://github.com/AY2223S1-CS2103T-T12-4/tp/blob/master/docs/UserGuide.md)
 !-->
 
@@ -26,6 +26,7 @@ Here are some symbols used throughout this user guide:
 
 - **[Introduction](#tassistant-user-guide)**
 - **[Quick Start](#quick-start)**
+- **[Layout](#layout)**
 - **[Features](#features)**
 - **[Command summary](#command-summary)**
 - **[Known issues](#known-issues)**
@@ -38,7 +39,7 @@ Here are some symbols used throughout this user guide:
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `TASsistant.jar` from [here]().
+2. Download the latest `TASsistant.jar` from [here](https://github.com/AY2324S1-CS2103T-F12-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TASsistant.
 
@@ -59,6 +60,23 @@ Here are some symbols used throughout this user guide:
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Layout**
+
+![layout image](images/GUI.png)
+
+1. Module List: This is where all modules that you have added to the program will appear.
+2. Tutorial List: This is where all tutorials that you have added to the program will appear.
+3. Command Box: This is where you type in your commands. After typing the command, press `enter` to execute them. 
+4. Output Box: This is where the program will provide feedback to your commands. When launching the program, the
+output box will be empty, but after executing a command, successful or otherwise, the feedback of the program, such as
+telling you that it doesn't recognise your command via an "Invalid command" message, will appear.
+5. Person List: The list of people TAssistant is showing you. When launching the program, his will be everyone
+TAssistant has data on, but you may filter the list of people with commands like
+[find](#locating-persons-by-name-find) and [search](#search--search).
+6. Assignment List: The list of assignments you have.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Features**
 
 **Notes about the command format:**
@@ -67,13 +85,14 @@ Here are some symbols used throughout this user guide:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order, except if the command requires an index. Indexes must always be put at the front. <br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `1 n/NAME`, `n/NAME 1` is NOT acceptable and may lead the program to read n/NAME as the index.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -83,7 +102,7 @@ Here are some symbols used throughout this user guide:
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -93,7 +112,7 @@ Format: `help`
 
 Adds a person to TASsistant.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STUDENT_NUMBER [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL s/STUDENT_NUMBER tele/TELEGRAM_USERNAME [t/TAG]…​`
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
@@ -118,7 +137,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STUDENT_NUMBER] 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -133,7 +152,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -171,7 +190,7 @@ Format: `search CONDITION1, CONDITION2, …`
 Examples:
 * `search module: CS2103T` returns all students in the module CS2103T
 * `search classNum: T03` returns all students in the class T03
-* `search studentName:` 'John Doe' returns all students with the name John Doe
+* `search studentName: John Doe`  returns all students with the name John Doe
 
 ### Clearing all entries : `clear`
 
@@ -191,7 +210,8 @@ TASsistant data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-TASsistant data are saved automatically as a JSON file `[JAR file location]/data/TASsistant.json`. Advanced users are welcome to update data directly by editing that data file.
+TASsistant data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
+Advanced users are welcome to update data directly by editing that data file.
 
 **Caution:**
 If your changes to the data file makes its format invalid, TASsistant will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
@@ -236,10 +256,10 @@ Adds the person at the specified INDEX displayed on the GUI to a given module.
 The index refers to the index number shown in the displayed user list. The index must be a positive integer.
 Will give an error message if the module given has not been made.
 
-Format: `addToModule INDEX m/MODULE`
+Format: `addToModule INDEX m/MODULE_NAME`
 
-Example: `addToModule 2 m/CS2103T` adds the person who is second from the top in the current list to the module
-CS2103T, if the module CS2103T exists.
+Example: `addToModule 1 m/CS1000` adds the person who is at the top in the current list to the module
+CS1000, if the module CS1000 exists.
 
 ### Removes a user from a given module: `removeFromModule`
 
@@ -248,10 +268,10 @@ The index refers to the index number shown in the displayed user list. The index
 
 :exclamation: Doing this also removes any tutorials that the user has which are part of the given module.
 
-Format: `removeFromModule INDEX m/MODULE`
+Format: `removeFromModule INDEX m/MODULE_NAME`
 
-Example: `removeFromModule 2 m/CS2103T` removes the person who is second from the top in the current list from the module
-CS2103T, if the module CS2103T exists and the person who is second from the top is part of the module CS2103T.
+Example: `removeFromModule 1 m/CS1000` removes the person who is at the top in the current list from the module
+CS1000, if the module CS1000 exists and the person at the top in the current list is part of the module CS1000.
 
 ### Adds a tutorial to a given module: `addTutorial`
 
@@ -261,25 +281,27 @@ been made for the module.
 
 Format: `addTutorial m/MODULE_NAME tn/TUTORIAL_NAME tt/TUTORIAL_TIME`
 
-Example: `addTutorial m/CS2103T tn/T12 tt/Mon 6pm` adds a tutorial with name T12 and time "Mon 6pm" belonging to module
-CS2103T, if module CS2103T exists.
+Example: `addTutorial m/CS1000 tn/T12 tt/Mon 6PM` adds a tutorial with name T12 and time "Mon 6PM" belonging to module
+CS1000, if module CS1000 exists.
 
 ### Deletes a tutorial from a given module: `deleteTutorial`
 
-Deletes a tutorial with a specific tutorial name to a given module.
-Will give an error message if the module given has not been made, or if the tutorial does not exist.
+Deletes a tutorial.
+The index refers to the position of the tutorial in the displayed tutorial list, with the leftmost tutorial being index 1.
+The index **must be a positive integer** 1, 2, 3...
+Will give an error message if the amount of tutorials is less than the index.
 
 :exclamation: Doing this removes the tutorial from everyone in the address book.
 
-Format: `deleteTutorial tn/TUTORIAL_NAME m/MODULE_NAME`
+Format: `deleteTutorial INDEX`
 
-Example: `deleteTutorial tn/c12 m/CS2103T` removes a tutorial with name T12 belonging to module CS2103T,
-if module CS2103T exists and the tutorial already exists.
+Example: `deleteTutorial 2` removes the second-leftmost tutorial from the tutorial list, if it exists.
 
 ### Adds a person to stated Tutorial: `addToTutorial`
 
 Adds a given user to the stated tutorial. 
-The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3. Fails if the index is not valid.
+The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3... 
+Fails if the index is not valid.
 
 Format: `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME`
 
@@ -287,7 +309,9 @@ Example: `addToTutorial 1 m/CS2103T tn/T11`
 
 ### Removes a person from stated Tutorial: `removeFromTutorial`
 
-Removes a given person from the stated tutorial. The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3. Fails if the index is not valid.
+Removes a given person from the stated tutorial. 
+The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3...
+Fails if the index is not valid.
 
 Format: `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME`
 
@@ -324,11 +348,20 @@ Format: `deleteAttn INDEX ln/LESSON_NUMBER`
 
 Example: `deleteAttn 1 ln/S1`
 
+### Adds an assignment `addAssignment`
+Adds a new assignment to the system. Fails if the name given is blank. 
+
+Format: `addAssignment assgn/ ASSIGNMENT_TITLE`
+
+Example: `addAssignment assgn/ Assignment 1`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. To resolve this, delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, 
+2. and later switch to using only the primary screen, the GUI will open off-screen. 
+3. To resolve this, delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -348,7 +381,7 @@ Example: `deleteAttn 1 ln/S1`
 | **deleteModule**       | `deleteModule INDEX` <br> e.g., `deleteModule 1`                                                                                                                      |
 | **addToModule**        | `addToModule INDEX m/MODULE_NAME` <br> e.g., `addToModule 2 m/CS2103T`                                                                                                |
 | **removeFromModule**   | `removeFromModule INDEX m/MODULE_NAME` <br> e.g., `removeFromModule 2 m/CS2103T`                                                                                      |
-| **addTutorial**        | `addTutorial TUTORIALNAME m/MODULE_NAME` <br> e.g., `addTutorial tn/c12 m/CS2103T`                                                                                    |
+| **addTutorial**        | `addTutorial m/MODULE_NAME tn/TUTORIAL_NAME tt/TUTORIAL_TIME` <br> e.g., `addTutorial m/CS1000 tn/T12 tt/Mon 6PM`                                                     |
 | **deleteTutorial**     | `deleteTutorial INDEX` <br> e.g., `deleteTutorial 2`                                                                                                                  |
 | **addToTutorial**      | `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `addToTutorial 1 m/CS2103T tn/T11`                                                                    |
 | **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                          |
@@ -362,7 +395,8 @@ Example: `deleteAttn 1 ln/S1`
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.
 * **Module**: A unit of study in a specific field set by NUS, such as CS2103T focusing on Software Engineering.
-* **Class**: Lessons that are part of a module. Includes laboratries, recitations, tutorials and any form of lesson that includes a TA.
+* **Tutorial**: Lessons that are part of a module. Includes not only tutorials, 
+but also laboratories, recitations and any form of lesson that includes a TA.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -370,6 +404,6 @@ Example: `deleteAttn 1 ln/S1`
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous UniNurse home folder.
+the data of your previous TAssistant home folder.
 
 --------------------------------------------------------------------------------------------------------------------

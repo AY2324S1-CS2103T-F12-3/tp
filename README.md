@@ -8,8 +8,6 @@ TASsistant is a desktop app for Teaching Assistants (TAs) in NUS to track inform
 involved in tutoring. It is optimised for users that have experience with a Command Line Interface (CLI) and aims to be
 able to handle contact organisation faster than GUI apps if the user can type quickly.
 
-[User Guide](https://github.com/AY2324S1-CS2103T-F12-3/tp/blob/master/docs/UserGuide.md)
-
 ![Ui](docs/images/Ui.png)
 
 ## Features

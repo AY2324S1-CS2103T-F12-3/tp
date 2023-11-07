@@ -23,11 +23,20 @@ public class AddToModuleCommandParser implements Parser<AddToModuleCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE);
 
-        // check if "m/" prefix exists and additional erroneous inputs such as add ppm/CS2100
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE);
+
         if (!isPrefixPresent(argMultimap, PREFIX_MODULE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToModuleCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX, pe);
+        }
+
         Module moduleToAddTo = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
         return new AddToModuleCommand(index, moduleToAddTo);
     }

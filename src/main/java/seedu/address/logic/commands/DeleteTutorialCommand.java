@@ -2,11 +2,22 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentNumber;
+import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
 
 /**
@@ -45,8 +56,29 @@ public class DeleteTutorialCommand extends Command {
         }
 
         Tutorial toDelete = lastShownList.get(targetIndex.getZeroBased());
+        deleteTutorialFromAllPeople(model, toDelete);
         model.deleteTutorial(toDelete);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
+    }
+
+    private void deleteTutorialFromAllPeople(Model model, Tutorial tutorial) {
+        ObservableList<Person> people = model.getFilteredPersonList();
+        for (Person person : people) {
+            if (person.getTutorials().contains(tutorial)) {
+                Name updatedName = person.getName();
+                Phone updatedPhone = person.getPhone();
+                Email updatedEmail = person.getEmail();
+                Set<Tag> updatedTags = person.getTags();
+                Set<Module> updatedModules = person.getModules();
+                Set<Tutorial> updatedTutorials = new HashSet<>(person.getTutorials());
+                updatedTutorials.remove(tutorial);
+                StudentNumber updatedStudentNumber = person.getStudentNumber();
+                Telegram updatedTelegram = person.getTelegram();
+                Person personWithoutTutorial = new Person(updatedName, updatedPhone, updatedEmail, updatedTags,
+                        updatedModules, updatedTutorials, updatedStudentNumber, updatedTelegram);
+                model.setPerson(person, personWithoutTutorial);
+            }
+        }
     }
 
     @Override

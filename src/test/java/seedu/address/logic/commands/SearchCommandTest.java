@@ -10,7 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_TG02;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalModules.FIRST_MODULE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL_TUT1_MON9PM;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,8 +26,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorial.Tutorial;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SearchCommand.
@@ -38,6 +42,11 @@ public class SearchCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model.addModule(FIRST_MODULE);
+        model.addTutorial(TUTORIAL_TUT1_MON9PM);
+        Person personWithModule = new PersonBuilder(model.getAddressBook().getPersonList().get(0))
+                .withModules(FIRST_MODULE).withTutorials(TUTORIAL_TUT1_MON9PM).build();
+        model.setPerson(model.getFilteredPersonList().get(0), personWithModule);
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
     }
 
@@ -55,25 +64,22 @@ public class SearchCommandTest {
 
     @Test
     public void execute_searchByModule() {
-        Module module = new Module(VALID_MODULE_CS2100);
         List<Name> nameList = new ArrayList<>();
-        List<Module> moduleList = new ArrayList<>(List.of(module));
+        List<Module> moduleList = new ArrayList<>(List.of(FIRST_MODULE));
         List<Tutorial> tutorialList = new ArrayList<>();
         List<Tag> tagList = new ArrayList<>();
-        expectedModel.updateFilteredPersonList(person -> person.getModules().contains(module));
+        expectedModel.updateFilteredPersonList(person -> person.getModules().contains(FIRST_MODULE));
         assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList, tagList), model,
                 SearchCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_searchByTutorial() {
-        Module modCS2100 = new Module(VALID_MODULE_CS2100);
-        Tutorial tutTG01 = new Tutorial(modCS2100, VALID_TUTORIAL_GROUP_TG01);
         List<Name> nameList = new ArrayList<>();
         List<Module> moduleList = new ArrayList<>();
-        List<Tutorial> tutorialList = new ArrayList<>(List.of(tutTG01));
+        List<Tutorial> tutorialList = new ArrayList<>(List.of(TUTORIAL_TUT1_MON9PM));
         List<Tag> tagList = new ArrayList<>();
-        expectedModel.updateFilteredPersonList(person -> person.getTutorials().contains(tutTG01));
+        expectedModel.updateFilteredPersonList(person -> person.getTutorials().contains(TUTORIAL_TUT1_MON9PM));
         assertCommandSuccess(new SearchCommand(nameList, moduleList, tutorialList, tagList), model,
                 SearchCommand.MESSAGE_SUCCESS, expectedModel);
     }

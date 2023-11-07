@@ -23,14 +23,23 @@ public class RemoveFromModuleCommandParser implements Parser<RemoveFromModuleCom
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE);
 
-        // check if "m/" prefix exists and additional erroneous inputs such as add ppm/CS2100
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MODULE);
+
         if (!isPrefixPresent(argMultimap, PREFIX_MODULE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RemoveFromModuleCommand.MESSAGE_USAGE));
         }
-        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        Module moduleToRemoveFrom = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
-        return new RemoveFromModuleCommand(index, moduleToRemoveFrom);
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX, pe);
+        }
+
+        Module moduleToAddTo = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
+        return new RemoveFromModuleCommand(index, moduleToAddTo);
     }
 
     /**
