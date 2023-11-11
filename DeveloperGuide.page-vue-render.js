@@ -317,6 +317,6 @@ with(this){return _c('h2',{attrs:{"id":"appendix-planned-enhancements"}},[_c('st
 with(this){return _c('ol',[_c('li',[_v("Currently, the addToModule and addToTutorial command, when used on a user that already has the given module, does not give an\nerror message. We intend to change this so that the commands when used on a user that already has the given\nmodule/tutorial will now give the error message "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("User already has the given module")]),_v(" or\n"),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("User already has the given tutorial")]),_v(" respectively in the output box.")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Fri, 10 Nov 2023, 21:15:14 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Sat, 11 Nov 2023, 15:36:01 GMT+8]")])])])}
 }];
   
